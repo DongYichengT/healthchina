@@ -4,56 +4,49 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>健康中国志愿服务纪实</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
       background: linear-gradient(120deg, #d1fae5 0%, #e0f2fe 50%, #fef7fb 100%);
       color: #1F2937;
       line-height: 1.8;
+      overflow-x: hidden;
     }
-    /* 头部优化 */
     header {
-      background: linear-gradient(90deg, #36D399, #FF9F43, #F472B6);
+      background: linear-gradient(90deg, #36D399, #FF9F43, #60A5FA);
       color: white;
       text-align: center;
-      padding: 70px 20px;
+      padding: 80px 20px;
       position: relative;
       overflow: hidden;
     }
-    header::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle at 30% 40%, rgba(255,255,255,0.15) 0%, transparent 60%);
-    }
-    h1 {
+    header h1 {
       font-size: 2.8em;
-      margin-bottom: 0.5em;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      position: relative;
+      text-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      animation: fadeInDown 1.5s ease;
     }
     header p {
       font-size: 1.2em;
       max-width: 800px;
-      margin: 0 auto;
-      position: relative;
+      margin: 10px auto 0;
+      animation: fadeInUp 2s ease;
     }
-    /* 导航优化 */
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     nav {
       display: flex;
       justify-content: center;
       background-color: white;
-      padding: 15px 10px;
-      box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
       position: sticky;
       top: 0;
       z-index: 999;
@@ -61,127 +54,120 @@
     nav a {
       color: #38BDF8;
       text-decoration: none;
-      margin: 0 20px;
+      margin: 0 18px;
       font-weight: 600;
-      font-size: 1.05em;
-      padding: 8px 12px;
-      border-radius: 20px;
-      transition: all 0.3s ease;
+      padding: 14px 10px;
+      transition: all 0.3s;
+      border-bottom: 3px solid transparent;
     }
     nav a:hover {
-      background-color: #38BDF8;
-      color: white;
-      transform: translateY(-2px);
+      color: #FF9F43;
+      border-color: #FF9F43;
     }
-    /* section优化 */
+
     .container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 20px;
+      padding: 50px 20px;
     }
     section {
-      padding: 60px 5%;
       background: white;
-      margin: 40px auto;
-      border-radius: 24px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.05);
-      border: 1px solid #f0f0f0;
+      border-radius: 20px;
+      padding: 50px;
+      margin-bottom: 60px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+    }
+    section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.08);
     }
     h2 {
-      color: #36D399;
-      border-left: 8px solid #FF9F43;
+      border-left: 8px solid #36D399;
       padding-left: 16px;
-      margin-bottom: 30px;
+      color: #1F2937;
       font-size: 2em;
-      display: flex;
-      align-items: center;
+      margin-bottom: 25px;
     }
-    h2::after {
-      content: "";
-      flex: 1;
-      height: 2px;
-      background: linear-gradient(90deg, #FF9F43, transparent);
-      margin-left: 20px;
+
+    /* 实践过程卡片 */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
     }
-    /* 列表优化 */
-    ul {
-      list-style: none;
-      margin: 20px 0;
+    .card {
+      background: linear-gradient(145deg, #ffffff, #f3f4f6);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    ul li {
-      margin: 15px 0;
-      padding-left: 30px;
-      position: relative;
-      font-size: 1.05em;
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
     }
-    ul li::before {
-      content: "✓";
-      position: absolute;
-      left: 0;
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-bottom: 4px solid #36D399;
+    }
+    .card-content {
+      padding: 20px;
+    }
+    .card-content h3 {
       color: #36D399;
-      font-weight: bold;
-      font-size: 1.2em;
-      margin-right: 10px;
+      margin-bottom: 10px;
     }
-    /* 图表容器优化 */
-    .chart-wrapper {
+    .card-content p {
+      color: #374151;
+      font-size: 0.95em;
+    }
+
+    /* 图示部分 */
+    .chart-section {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 40px;
-      margin: 40px 0;
+      gap: 30px;
     }
-    .chart-container {
-      width: 280px;
-      height: 280px;
-      position: relative;
-      padding: 20px;
-      background: linear-gradient(145deg, #f9f9f9, #ffffff);
-      border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-    }
-    .chart-title {
+    .chart {
+      width: 300px;
       text-align: center;
-      font-weight: 600;
+      border-radius: 16px;
+      background: #f9fafb;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      transition: all 0.3s;
+    }
+    .chart:hover { transform: scale(1.03); }
+    .chart img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 10px;
+    }
+    .chart h4 {
       color: #38BDF8;
-      margin-bottom: 15px;
-      font-size: 1.1em;
+      font-size: 1em;
     }
-    /* 文字段落优化 */
-    p {
-      font-size: 1.05em;
-      margin-bottom: 20px;
-      color: #374151;
-    }
-    /* 底部优化 */
+
     footer {
       text-align: center;
-      background: linear-gradient(90deg, #FBBF24, #F472B6);
+      background: linear-gradient(90deg, #36D399, #FF9F43, #F472B6);
       color: white;
       padding: 30px 0;
-      margin-top: 60px;
       font-size: 1.1em;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.1);
     }
-    /* 响应式优化 */
+
     @media (max-width: 768px) {
-      h1 {
-        font-size: 2.2em;
-      }
-      h2 {
-        font-size: 1.6em;
-      }
-      nav a {
-        margin: 0 8px;
-        font-size: 0.95em;
-      }
-      .chart-container {
-        width: 240px;
-        height: 240px;
-      }
+      section { padding: 30px 20px; }
+      h2 { font-size: 1.6em; }
+      .card img { height: 150px; }
     }
   </style>
 </head>
+
 <body>
   <header>
     <h1>健康中国 · 医院志愿服务纪实</h1>
@@ -191,7 +177,7 @@
   <nav>
     <a href="#intro">项目背景</a>
     <a href="#process">实践过程</a>
-    <a href="#survey">问卷分析</a>
+    <a href="#survey">调研分析</a>
     <a href="#policy">政策关联</a>
     <a href="#conclusion">核心结论</a>
   </nav>
@@ -199,166 +185,79 @@
   <div class="container">
     <section id="intro">
       <h2>项目背景</h2>
-      <p>在“健康中国2030”战略深度推进的背景下，我国基层健康服务需求持续增长，但居民健康认知不均衡、急救知识普及率不足等问题仍较为突出。为响应国家“全民健康素养提升行动”号召，我们围绕“基层民生服务与政策落地”核心主题，走进地方医院及社区卫生服务中心，开展多元化医疗志愿服务与健康科普宣传活动。</p>
-      <p>团队通过实地志愿服务、问卷调研、深度访谈等形式，深入了解居民健康意识、医疗服务可及性现状，探索高校志愿服务与基层健康服务的融合路径，助力健康中国政策在民生一线落地生根。</p>
+      <p>在“健康中国2030”战略的指导下，大学生志愿者积极响应“全民健康素养提升行动”，深入基层医疗机构与社区，聚焦急救知识普及、健康生活宣传与民生服务协助，助力健康中国建设的落地实践。</p>
+      <p>我们的目标不仅是服务，更是用青春和行动推动政策落地、强化公众健康意识，构建一个人人懂健康、人人守健康的社会氛围。</p>
     </section>
 
     <section id="process">
       <h2>实践过程</h2>
-      <p>我们联合市人民医院、社区卫生服务中心，组建“医线燃光·急救护航”志愿服务队，开展为期3个月的实践活动，核心内容包括：</p>
-      <ul>
-        <li>📘 急救知识普及：由持救护员证的团队成员主导，开展心肺复苏（CPR）、海姆立克急救法、AED使用方法等实操培训，覆盖居民及患者家属200余人次；</li>
-        <li>🩺 健康生活宣传：设计制作健康饮食、科学运动、慢性病管理等主题宣传册，结合趣味问答、案例讲解等形式，走进病房及社区开展科普5场；</li>
-        <li>🤝 陪诊志愿服务：针对老年患者、行动不便者等群体，提供就医引导、挂号协助、检查陪同、医嘱传达等服务，累计服务时长超500小时；</li>
-        <li>📊 民生健康调研：面向居民、患者及医护人员发放问卷300份，回收有效问卷278份，系统分析基层健康服务需求与志愿服务反馈。</li>
-      </ul>
+      <div class="cards">
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1587502536263-9296a3a0f79d" alt="急救培训">
+          <div class="card-content">
+            <h3>急救知识普及</h3>
+            <p>组织心肺复苏（CPR）与海姆立克法实操教学，覆盖200余人次，增强居民自救互救意识。</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1576765607924-3c85bb5de9af" alt="健康宣传">
+          <div class="card-content">
+            <h3>健康生活宣传</h3>
+            <p>通过健康饮食、慢性病管理宣传册与互动问答，帮助居民树立科学健康观。</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1594824476967-48c8b9642737" alt="陪诊服务">
+          <div class="card-content">
+            <h3>陪诊志愿服务</h3>
+            <p>为老年患者、行动不便者提供全程就医协助，累计志愿时长超500小时。</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1531973968078-9bb02785f13d" alt="调研分析">
+          <div class="card-content">
+            <h3>民生健康调研</h3>
+            <p>回收有效问卷278份，分析居民健康认知与志愿服务需求，为后续优化提供数据支持。</p>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section id="survey">
-      <h2>问卷调查与结果</h2>
-      <p>本次问卷聚焦居民健康认知、急救知识掌握情况及志愿服务成效，数据结果直观反映了基层民生健康服务的现状与需求：</p>
-      
-      <div class="chart-wrapper">
-        <!-- 图表1：健康中国政策知晓度 -->
-        <div class="chart-container">
-          <div class="chart-title">健康中国政策知晓度</div>
-          <canvas id="chart1"></canvas>
+      <h2>调研分析</h2>
+      <div class="chart-section">
+        <div class="chart">
+          <img src="https://cdn-icons-png.flaticon.com/512/4213/4213599.png" alt="政策知晓度">
+          <h4>健康中国政策知晓度：72%</h4>
         </div>
-        <!-- 图表2：急救知识掌握率 -->
-        <div class="chart-container">
-          <div class="chart-title">急救知识掌握率</div>
-          <canvas id="chart2"></canvas>
+        <div class="chart">
+          <img src="https://cdn-icons-png.flaticon.com/512/4599/4599634.png" alt="急救掌握率">
+          <h4>急救知识掌握率：38%</h4>
         </div>
-        <!-- 图表3：健康行为改善意愿 -->
-        <div class="chart-container">
-          <div class="chart-title">志愿活动后健康行为改善意愿</div>
-          <canvas id="chart3"></canvas>
+        <div class="chart">
+          <img src="https://cdn-icons-png.flaticon.com/512/4422/4422994.png" alt="健康改善">
+          <h4>健康行为改善意愿：65%</h4>
         </div>
       </div>
-
-      <p>数据显示：居民对“健康中国”政策知晓度达到72%，说明国家民生健康政策的宣传已取得一定成效；但急救知识掌握率仅38%，反映出基层急救科普的紧迫性。志愿活动后，65%的受访者表示会主动改善健康行为（如规律锻炼、定期体检），82%的受访者希望持续开展此类健康科普活动，印证了志愿服务在民生健康服务中的实际价值。</p>
     </section>
 
     <section id="policy">
       <h2>政策关联与实践价值</h2>
-      <p>我们的志愿服务紧密呼应国家多项民生健康与志愿服务相关政策，以实践行动推动政策落地见效：</p>
-      <p>一是契合《健康中国行动（2019—2030）》中“全民健康素养提升行动”“应急救护科普行动”的核心要求，通过基层科普与实操培训，助力提升全民健康素养和自救互救能力，填补了专业医疗服务在科普领域的缺口。</p>
-      <p>二是响应《关于完善志愿服务制度 促进志愿服务事业发展的意见》，发挥高校青年志愿者的专业优势与活力，搭建“高校—医院—社区”志愿服务联动机制，为基层医疗服务注入社会力量，实现医疗资源与社会资源的互补共享。</p>
-      <p>三是落实“以人民为中心”的发展思想，针对老年群体、行动不便者等重点人群的就医难题，提供精准化、人性化志愿服务，让民生健康政策真正惠及每一个需要帮助的人，增强了群众的获得感与幸福感。</p>
+      <p>志愿行动呼应《健康中国行动（2019—2030）》与《志愿服务制度完善意见》精神，推动健康教育与应急救护普及，促进医疗资源与社会资源互补共享。</p>
+      <p>通过“高校—医院—社区”联动，青年志愿者以知识与行动助力政策落地，让基层群众真正感受到健康政策带来的民生温度。</p>
     </section>
 
     <section id="conclusion">
       <h2>核心结论</h2>
-      <p>以“活力绿+暖阳橙”为核心视觉、以“民生为本、志愿赋能”为实践理念，本次志愿服务实践得出以下核心结论：</p>
       <ul>
-        <li>💡 志愿服务是健康传播的有效载体：基层群众对健康科普的强需求与志愿活动的高认可度，表明志愿服务能以更灵活、更贴近民生的方式传递健康理念，弥补专业医疗服务的科普短板；</li>
-        <li>🏥 政策落地需精准对接民生需求：健康中国政策的知晓度与急救知识掌握率的反差，提示基层健康服务需进一步聚焦“实操性、针对性”，将政策要求转化为群众易懂、能用的健康服务；</li>
-        <li>🌱 青年是健康中国的重要推动者：高校志愿者以专业技能与责任担当，搭建了政策与民生之间的沟通桥梁，既为基层健康服务注入了青春活力，也让青年在实践中深化了对国情民生的认知，实现了个人成长与社会价值的统一；</li>
-        <li>🔄 需建立长效联动机制：“高校—医院—社区”的三方联动模式成效显著，未来需进一步完善培训体系、统筹服务资源，让健康志愿服务常态化、专业化，持续为健康中国建设注入持久动力。</li>
+        <li>✅ 志愿服务是政策落地的重要桥梁，能以灵活形式推动健康理念传播；</li>
+        <li>✅ 青年力量是健康中国的重要推动者，行动中实现自我成长与社会价值统一；</li>
+        <li>✅ “高校—医院—社区”协作模式有助于形成常态化、专业化志愿体系；</li>
+        <li>✅ 健康教育仍需深化基层科普与实操培训，持续提升民众健康素养。</li>
       </ul>
     </section>
   </div>
 
-  <footer>
-    健康中国 · 青春在行动 — 大学生社会实践纪实报告 | 2025年
-  </footer>
-
-  <script>
-    // 图表通用配置（含数据标注）
-    const chartOptions = {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          position: 'bottom',
-          labels: {
-            font: { size: 12, family: 'Microsoft YaHei' },
-            padding: 15
-          }
-        },
-        tooltip: {
-          enabled: true,
-          backgroundColor: 'rgba(0,0,0,0.7)',
-          padding: 10,
-          titleFont: { size: 14 },
-          bodyFont: { size: 13 }
-        },
-        // 数据标注插件
-        datalabels: {
-          anchor: 'center',
-          align: 'center',
-          color: '#1F2937',
-          font: {
-            size: 16,
-            weight: 'bold',
-            family: 'Microsoft YaHei'
-          },
-          formatter: (value) => `${value}%`
-        }
-      },
-      cutout: '70%',
-      animation: {
-        animateScale: true,
-        animateRotate: true,
-        duration: 2000,
-        easing: 'easeOutQuart'
-      }
-    };
-
-    // 配色方案（缤纷且协调）
-    const colors1 = ['#36D399', '#FF9F43'];
-    const colors2 = ['#FF9F43', '#36D399'];
-    const colors3 = ['#38BDF8', '#FBBF24'];
-
-    // 图表1：健康中国政策知晓度
-    new Chart(document.getElementById('chart1'), {
-      type: 'doughnut',
-      data: {
-        labels: ['知晓', '不了解'],
-        datasets: [{
-          data: [72, 28],
-          backgroundColor: colors1,
-          borderWidth: 0,
-          hoverOffset: 10
-        }]
-      },
-      options: { ...chartOptions, plugins: { ...chartOptions.plugins } }
-    });
-
-    // 图表2：急救知识掌握率
-    new Chart(document.getElementById('chart2'), {
-      type: 'doughnut',
-      data: {
-        labels: ['掌握', '不了解'],
-        datasets: [{
-          data: [38, 62],
-          backgroundColor: colors2,
-          borderWidth: 0,
-          hoverOffset: 10
-        }]
-      },
-      options: { ...chartOptions, plugins: { ...chartOptions.plugins } }
-    });
-
-    // 图表3：健康行为改善意愿
-    new Chart(document.getElementById('chart3'), {
-      type: 'doughnut',
-      data: {
-        labels: ['会改善', '无明显变化'],
-        datasets: [{
-          data: [65, 35],
-          backgroundColor: colors3,
-          borderWidth: 0,
-          hoverOffset: 10
-        }]
-      },
-      options: { ...chartOptions, plugins: { ...chartOptions.plugins } }
-    });
-
-    // 注册数据标注插件（需Chart.js 3.0+）
-    Chart.register(ChartDataLabels);
-  </script>
-  <!-- 引入数据标注插件 -->
-  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
+  <footer>健康中国 · 青春在行动 — 大学生社会实践纪实报告 | 2025</footer>
 </body>
 </html>
