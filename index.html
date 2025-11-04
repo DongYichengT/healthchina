@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>健康中国志愿服务纪实</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -14,32 +15,19 @@
       overflow-x: hidden;
     }
     header {
-      background: linear-gradient(90deg, #36D399, #FF9F43, #60A5FA);
+      background: linear-gradient(90deg, #36D399, #FF9F43, #38BDF8);
       color: white;
       text-align: center;
       padding: 80px 20px;
-      position: relative;
-      overflow: hidden;
     }
     header h1 {
       font-size: 2.8em;
       text-shadow: 0 3px 10px rgba(0,0,0,0.1);
-      animation: fadeInDown 1.5s ease;
     }
     header p {
       font-size: 1.2em;
       max-width: 800px;
       margin: 10px auto 0;
-      animation: fadeInUp 2s ease;
-    }
-
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
     }
 
     nav {
@@ -120,36 +108,33 @@
       color: #36D399;
       margin-bottom: 10px;
     }
-    .card-content p {
-      color: #374151;
-      font-size: 0.95em;
-    }
 
-    /* 图示部分 */
+    /* 调研分析部分 */
     .chart-section {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 30px;
-    }
-    .chart {
-      width: 300px;
+      gap: 40px;
       text-align: center;
-      border-radius: 16px;
+    }
+    .chart-box {
+      width: 220px;
       background: #f9fafb;
+      border-radius: 16px;
       padding: 20px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.05);
       transition: all 0.3s;
     }
-    .chart:hover { transform: scale(1.03); }
-    .chart img {
-      width: 100%;
-      border-radius: 12px;
-      margin-bottom: 10px;
+    .chart-box:hover { transform: scale(1.05); }
+    canvas {
+      width: 200px !important;
+      height: 200px !important;
+      margin-bottom: 15px;
     }
-    .chart h4 {
-      color: #38BDF8;
+    .chart-title {
       font-size: 1em;
+      color: #374151;
+      font-weight: 600;
     }
 
     footer {
@@ -226,17 +211,17 @@
     <section id="survey">
       <h2>调研分析</h2>
       <div class="chart-section">
-        <div class="chart">
-          <img src="https://cdn-icons-png.flaticon.com/512/4213/4213599.png" alt="政策知晓度">
-          <h4>健康中国政策知晓度：72%</h4>
+        <div class="chart-box">
+          <canvas id="chart1"></canvas>
+          <div class="chart-title">政策知晓度：72%</div>
         </div>
-        <div class="chart">
-          <img src="https://cdn-icons-png.flaticon.com/512/4599/4599634.png" alt="急救掌握率">
-          <h4>急救知识掌握率：38%</h4>
+        <div class="chart-box">
+          <canvas id="chart2"></canvas>
+          <div class="chart-title">急救知识掌握率：38%</div>
         </div>
-        <div class="chart">
-          <img src="https://cdn-icons-png.flaticon.com/512/4422/4422994.png" alt="健康改善">
-          <h4>健康行为改善意愿：65%</h4>
+        <div class="chart-box">
+          <canvas id="chart3"></canvas>
+          <div class="chart-title">健康改善意愿：65%</div>
         </div>
       </div>
     </section>
@@ -259,5 +244,30 @@
   </div>
 
   <footer>健康中国 · 青春在行动 — 大学生社会实践纪实报告 | 2025</footer>
+
+  <script>
+    const chartConfig = (ctx, value, label, colors) => {
+      new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ['达成比例', '未达成'],
+          datasets: [{
+            data: [value, 100 - value],
+            backgroundColor: [colors[0], '#E5E7EB'],
+            borderWidth: 0,
+          }]
+        },
+        options: {
+          cutout: '70%',
+          plugins: { legend: { display: false } },
+          responsive: true
+        }
+      });
+    };
+
+    chartConfig(document.getElementById('chart1'), 72, '政策知晓度', ['#36D399']);
+    chartConfig(document.getElementById('chart2'), 38, '急救知识', ['#FF9F43']);
+    chartConfig(document.getElementById('chart3'), 65, '健康改善', ['#38BDF8']);
+  </script>
 </body>
 </html>
