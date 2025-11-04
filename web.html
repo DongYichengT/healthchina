@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>健康中国·青春行动——医院志愿服务纪实</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+  <!-- 页眉 -->
+  <header class="bg-blue-600 text-white py-6 shadow-md">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <h1 class="text-3xl font-bold">健康中国·青春行动</h1>
+      <p class="text-lg mt-2">—— 医院志愿服务的实践探索与民生价值</p>
+    </div>
+  </header>
+
+  <!-- 导航栏 -->
+  <nav class="bg-white shadow-sm sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto flex justify-around py-3 text-blue-700 font-medium">
+      <a href="#intro" class="hover:text-blue-500">首页</a>
+      <a href="#practice" class="hover:text-blue-500">实践过程</a>
+      <a href="#data" class="hover:text-blue-500">数据与分析</a>
+      <a href="#policy" class="hover:text-blue-500">政策背景</a>
+      <a href="#reflection" class="hover:text-blue-500">思考与总结</a>
+    </div>
+  </nav>
+
+  <!-- 首页介绍 -->
+  <section id="intro" class="max-w-6xl mx-auto py-16 px-4 text-center">
+    <h2 class="text-2xl font-semibold mb-4 text-blue-700">项目简介</h2>
+    <p class="text-gray-700 leading-relaxed text-lg">
+      在“健康中国2030”战略背景下，我们大学生志愿服务团队走进基层医院，
+      参与门诊引导、健康宣教、急救知识普及等服务活动，
+      深入了解医疗民生政策的落实情况，以青春之力助力健康中国建设。
+    </p>
+    <img src="https://cdn.pixabay.com/photo/2017/09/04/18/15/volunteer-2712937_1280.jpg" alt="志愿服务" class="mx-auto rounded-2xl shadow-md mt-8 w-3/4">
+  </section>
+
+  <!-- 实践过程 -->
+  <section id="practice" class="bg-white py-16 px-4">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-2xl font-semibold mb-6 text-blue-700 text-center">实践过程纪实</h2>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div>
+          <h3 class="font-bold text-xl mb-2">🏥 医院志愿服务日常</h3>
+          <p class="text-gray-700 leading-relaxed">
+            我们在市人民医院的门诊大厅协助患者挂号、引导就诊、陪伴老年人看病，
+            感受到了基层医疗体系中志愿者的重要作用。许多患者对志愿者的微笑与帮助表示感谢，
+            这让我们体会到民生服务的温度。
+          </p>
+        </div>
+        <img src="https://cdn.pixabay.com/photo/2016/03/27/19/47/volunteers-1284366_1280.jpg" class="rounded-2xl shadow-md">
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8 mt-12">
+        <img src="https://cdn.pixabay.com/photo/2018/02/06/16/08/first-aid-3131502_1280.jpg" class="rounded-2xl shadow-md">
+        <div>
+          <h3 class="font-bold text-xl mb-2">⛑️ 急救知识普及活动</h3>
+          <p class="text-gray-700 leading-relaxed">
+            我们举办了“心肺复苏基础培训”和“日常急救知识课堂”，向社区居民讲解如何在突发情况下进行自救与互救。
+            活动现场气氛热烈，居民积极参与并表示希望此类活动能持续开展。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 数据与分析 -->
+  <section id="data" class="bg-blue-50 py-16 px-4">
+    <div class="max-w-6xl mx-auto text-center">
+      <h2 class="text-2xl font-semibold mb-6 text-blue-700">数据与分析</h2>
+      <canvas id="serviceChart" class="mx-auto w-3/4"></canvas>
+      <p class="mt-6 text-gray-700 leading-relaxed">
+        在本次志愿活动中，共有 <strong>56名志愿者</strong> 参与服务，累计服务时长 <strong>340小时</strong>，
+        覆盖群众超过 <strong>1200人</strong>。我们通过问卷调查发现，<strong>92%</strong> 的受访者表示
+        志愿服务有效提升了就医体验。
+      </p>
+    </div>
+  </section>
+
+  <!-- 政策背景 -->
+  <section id="policy" class="bg-white py-16 px-4">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-2xl font-semibold mb-6 text-blue-700 text-center">政策背景与健康中国战略</h2>
+      <p class="text-gray-700 leading-relaxed text-lg">
+        “健康中国2030”规划纲要明确提出，要推动健康服务体系的完善与社会共建。
+        医院志愿服务正是政策落地的重要实践形式，它不仅减轻医务人员负担，
+        还提升了群众的获得感与幸福感，体现了“全民健康、共建共享”的核心理念。
+      </p>
+      <img src="https://cdn.pixabay.com/photo/2017/08/02/09/29/doctor-2571847_1280.jpg" class="rounded-2xl shadow-md mx-auto mt-8 w-3/4">
+    </div>
+  </section>
+
+  <!-- 思考与总结 -->
+  <section id="reflection" class="bg-blue-100 py-16 px-4 text-center">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-semibold mb-6 text-blue-700">思考与总结</h2>
+      <p class="text-gray-800 leading-relaxed text-lg">
+        医院志愿服务不仅是一次社会实践，更是对“健康中国”理念的深刻体验。
+        我们看到基层医疗服务体系正在不断优化，政策在落地中焕发活力，青年力量正在其中发挥重要作用。
+        在未来，我们希望继续通过志愿服务，传递健康、传播关爱，为建设健康中国贡献青春力量。
+      </p>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="bg-blue-600 text-white text-center py-6 mt-8">
+    <p>© 2025 大学生社会实践团队 | 健康中国·青春行动</p>
+  </footer>
+
+  <!-- 图表脚本 -->
+  <script>
+    const ctx = document.getElementById('serviceChart');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['门诊引导', '健康宣教', '急救普及', '调查研究'],
+        datasets: [{
+          label: '服务时长（小时）',
+          data: [120, 90, 80, 50],
+          backgroundColor: 'rgba(37, 99, 235, 0.6)',
+        }]
+      },
+      options: {
+        scales: { y: { beginAtZero: true } },
+        plugins: { legend: { display: false } }
+      }
+    });
+  </script>
+</body>
+</html>
